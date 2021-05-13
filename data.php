@@ -2,7 +2,7 @@
     function getConnection( $servername = "localhost",
                             $username = "root",
                             $password = "root",
-                            $dbname = "dbhotel"){
+                            $dbname = "dbhotel"){ //funzione di verifica connessione
 
         $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -13,11 +13,11 @@
         return $conn;
     }
 
-    function getStanzeSql(){
-        return "SELECT room_number FROM stanze";
+    function getStanzeSql(){ //query per estrarre tutte le stanze
+        return "SELECT id,room_number FROM stanze";
     }
 
-    function getStanzaByNumber(){
-        return 'SELECT floor,beds FROM stanze WHERE room_number = ?';
+    function getStanzaByNumber(){ // query per estrarre dettaglio 1 stanza
+        return 'SELECT room_number,floor,beds FROM stanze WHERE id = ?';
     }
 ?>

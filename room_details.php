@@ -19,35 +19,32 @@
     <title>Dettaglio stanza</title>
 </head>
 <body>
-    <div id="app" class="container text-center">
+    <div class="container text-center">
         <div class="row">
             <div class="col-12 mt-3">
 
-                <h1>DB</h1>
+                <h1>Dettaglio stanza</h1>
 
                 <?php
                     
                     require_once 'data.php';
-                    $id =(int) $_GET['room_number'];
+                    $id = $_GET['room_id'];
 
                     $conn = getConnection();
                     $sql = getStanzaByNumber();
 
-                    // $sql = "SELECT name,lastname FROM ospiti WHERE id = ? ";
                     $stmt = $conn -> prepare($sql);
                     $stmt -> bind_param("i",$id);
                     $stmt -> execute();
-                    $stmt -> bind_result($floor,$beds);
-                    //$stmt -> fetch();
-                    //var_dump($name, $lastname);
+                    $stmt -> bind_result($room_number,$floor,$beds);
                     while($stmt -> fetch()){
-                         echo '<h2>Stanza numero '.$id.'</h2>';
+                         echo '<h2>Stanza numero '.$room_number.'</h2>';
                          echo '<p>Piano: '.$floor.'</p>';
                          echo '<p>Numero letti '.$beds.'</p>';
                     }
 
                     $stmt -> close();
-                    $conn -> close();    
+                    $conn -> close();
                 ?>
                 
             </div>
